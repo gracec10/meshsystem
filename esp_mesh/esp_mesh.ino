@@ -42,12 +42,15 @@ Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
   toSend = "ESP" + String(id);
+  int sending = 1;
   if(HTS != 0) { //Add temp / humidity values
     TempAndHumidity lastValues = dht.getTempAndHumidity();
     if(lastValues.humidity <= 100) {
       toSend.concat(",TMP" + String(lastValues.temperature,0));
       toSend.concat(",HMD" + String(lastValues.humidity,0));
-    }
+    } else {
+      sending = 0;
+    };
   };
   if(HAL != 0) { //Add hall sensor value
     toSend.concat(",HAL" + String(digitalRead(HAL)));
@@ -60,7 +63,9 @@ void sendMessage() {
     toSend.concat(",USN" + String(ultrasonic.read()));
   };
   toSend.concat("\n");
-  mesh.sendBroadcast(toSend);
+  if(sending = 1) {
+    mesh.sendBroadcast(toSend);
+  };
 
   taskSendMessage.setInterval(500);
 }
