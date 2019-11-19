@@ -11,9 +11,9 @@
  *  value to 0 and it will be ignored. This is for consistent
  *  formatting across messages sent and logged with the network.
  */
-#define id 1 //Set the ID of the ESP32 within the context of the system
+#define id 2 //Set the ID of the ESP32 within the context of the system
 #define HTS 0 //Set the HTS temp/humidity sensor pin. Set to 0 if this ESP does not have this sensor.
-#define HAL 0 //Set the Hall sensor pin. Set to 0 if this ESP does not have this sensor.
+#define HAL 25 //Set the Hall sensor pin. Set to 0 if this ESP does not have this sensor.
 #define LIT 0 //Set the photoresistor pin. Set to 0 if this ESP does not have this sensor.
 #define USN 0 //Set the ultrasonic distance sensor trigger pin. Set to 0 if this ESP does not have this sensor.
 #define USE 0 //Set the ultrasonic distance sensor echo pin. If the trigger pin is set to 0 this will be ignored.  Set to 0 if this ESP does not have this sensor.
@@ -42,25 +42,27 @@ void sendMessage() {
   toSend = "ESP" + String(id);
   if(HTS != 0) { //Add temp / humidity values
     TempAndHumidity lastValues = dht.getTempAndHumidity();
-    toSend = toSend.concat(",TMP" + String(lastValues.temperature,0));
-    toSend = toSend.concat(",HMD" + String(lastValues.humidity,0));
+    toSend.concat(",TMP" + String(lastValues.temperature,0));
+    toSend.concat(",HMD" + String(lastValues.humidity,0));
   };
-  if(HAL !=0) { //Add hall sensor value
-    toSend = toSend.concat(",HAL" + String(digitalRead(HAL)));
+  if(HAL != 0) { //Add hall sensor value
+    toSend.concat(",HAL" + String(digitalRead(HAL)));
+
   };
   if(LIT != 0) { //Add photoresistor value
-    toSend = toSend.concat(",LIT" + String(analogRead(LIT)));
+    toSend.concat(",LIT" + String(analogRead(LIT)));
   };
   if(USN != 0 && USE != 0) { //Add ultrasonic value
-    toSend = toSend.concat(",USN" + String(ultrasonic.read()));
+    toSend.concat(",USN" + String(ultrasonic.read()));
   };
-  toSend.concat("\r\n");
+  toSend.concat("\n");
   mesh.sendBroadcast(toSend);
-  taskSendMessage.setInterval(0.1);
+
+  taskSendMessage.setInterval(0.3);
 }
 
 void receivedCallback( uint32_t from, String &msg ) {
-  Serial.printf(" *  value to 0 and it will be ignored. This is for consistent%s",msg.c_str());
+  Serial.printf(" Message Received %d: %s", from, msg.c_str());
 }
 
 void newConnectionCallback(uint32_t nodeId) {
