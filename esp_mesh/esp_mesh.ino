@@ -44,8 +44,10 @@ void sendMessage() {
   toSend = "ESP" + String(id);
   if(HTS != 0) { //Add temp / humidity values
     TempAndHumidity lastValues = dht.getTempAndHumidity();
-    toSend.concat(",TMP" + String(lastValues.temperature,0));
-    toSend.concat(",HMD" + String(lastValues.humidity,0));
+    if(lastValues.humidity <= 100) {
+      toSend.concat(",TMP" + String(lastValues.temperature,0));
+      toSend.concat(",HMD" + String(lastValues.humidity,0));
+    }
   };
   if(HAL != 0) { //Add hall sensor value
     toSend.concat(",HAL" + String(digitalRead(HAL)));
