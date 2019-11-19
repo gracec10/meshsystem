@@ -1,3 +1,5 @@
+// Need to install ArduinoJSON and TaskScheduler as well
+
 #include <painlessMesh.h>
 #include <AsyncTCP.h>
 #include <DHTesp.h>
@@ -13,7 +15,7 @@
  */
 #define id 2 //Set the ID of the ESP32 within the context of the system
 #define HTS 0 //Set the HTS temp/humidity sensor pin. Set to 0 if this ESP does not have this sensor.
-#define HAL 25 //Set the Hall sensor pin. Set to 0 if this ESP does not have this sensor.
+#define HAL 34 //Set the Hall sensor pin. Set to 0 if this ESP does not have this sensor.
 #define LIT 0 //Set the photoresistor pin. Set to 0 if this ESP does not have this sensor.
 #define USN 0 //Set the ultrasonic distance sensor trigger pin. Set to 0 if this ESP does not have this sensor.
 #define USE 0 //Set the ultrasonic distance sensor echo pin. If the trigger pin is set to 0 this will be ignored.  Set to 0 if this ESP does not have this sensor.
@@ -58,7 +60,7 @@ void sendMessage() {
   toSend.concat("\n");
   mesh.sendBroadcast(toSend);
 
-  taskSendMessage.setInterval(0.3);
+  taskSendMessage.setInterval(500);
 }
 
 void receivedCallback( uint32_t from, String &msg ) {
