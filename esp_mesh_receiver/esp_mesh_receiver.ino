@@ -9,7 +9,7 @@ painlessMesh mesh;
 #define   MESH_PORT       5555
 
 void receivedCallback( uint32_t from, String &msg ) {
-  Serial.printf("%u,%s\n", from, msg.c_str());
+  Serial.printf("%s\n", msg.c_str());
 }
 
 void newConnectionCallback(uint32_t nodeId) {
