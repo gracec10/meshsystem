@@ -14,11 +14,11 @@
  *  formatting across messages sent and logged with the network.
  */
 #define id 8 //Set the ID of the ESP32 within the context of the system
-#define HTS 0 //Set the HTS temp/humidity sensor pin. Set to 0 if this ESP does not have this sensor.
-#define DRA 0 //Set the door 1 sensor pin. Set to 0 if this ESP does not have this sensor.
-#define DRB 0 //Set the door 2 sensor pin. Set to 0 if this ESP does not have this sensor.
-#define PIZ 0 //Set the piezo wind pin. Set to 0 if this ESP does not have this sensor.
-#define POT 34 //Set the sliding potentiometer pin. Set to 0 if this ESP does not have this sensor.
+#define HTS 0 //Set the HTS temp/humidity sensor pin. Set to 0 if this ESP does not have this sensor. ESP-ID 1
+#define DRA 0 //Set the door 1 sensor pin. Set to 0 if this ESP does not have this sensor. ESP-ID 2
+#define DRB 0 //Set the door 2 sensor pin. Set to 0 if this ESP does not have this sensor. ESP-ID 3
+#define PIZ 0 //Set the piezo wind pin. Set to 0 if this ESP does not have this sensor. ESP-ID 1
+#define POT 34 //Set the sliding potentiometer pin. Set to 0 if this ESP does not have this sensor. ESP-ID 4
 
 //Set up sensor variables 
 DHTesp dht;
