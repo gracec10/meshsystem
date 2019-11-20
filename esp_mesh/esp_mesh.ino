@@ -13,19 +13,18 @@
  *  value to 0 and it will be ignored. This is for consistent
  *  formatting across messages sent and logged with the network.
  */
-#define id 2 //Set the ID of the ESP32 within the context of the system
+#define id 8 //Set the ID of the ESP32 within the context of the system
 #define HTS 0 //Set the HTS temp/humidity sensor pin. Set to 0 if this ESP does not have this sensor.
-#define HAL 34 //Set the Hall sensor pin. Set to 0 if this ESP does not have this sensor.
-#define LIT 0 //Set the photoresistor pin. Set to 0 if this ESP does not have this sensor.
-#define USN 0 //Set the ultrasonic distance sensor trigger pin. Set to 0 if this ESP does not have this sensor.
-#define USE 0 //Set the ultrasonic distance sensor echo pin. If the trigger pin is set to 0 this will be ignored.  Set to 0 if this ESP does not have this sensor.
+#define DRA 0 //Set the door 1 sensor pin. Set to 0 if this ESP does not have this sensor.
+#define DRB 0 //Set the door 2 sensor pin. Set to 0 if this ESP does not have this sensor.
+#define PIZ 0 //Set the piezo wind pin. Set to 0 if this ESP does not have this sensor.
+#define POT 34 //Set the sliding potentiometer pin. Set to 0 if this ESP does not have this sensor.
 
 //Set up sensor variables 
 DHTesp dht;
 TaskHandle_t tempTaskHandle = NULL;
-Ultrasonic ultrasonic(USN, USE, 40000UL);
-int hallState = 0;
-int lightValue;
+int potValue = 0;
+int piezoValue =0 ;
 String toSend;
 
 Scheduler userScheduler; // to control your personal task
@@ -52,15 +51,19 @@ void sendMessage() {
       sending = 0;
     };
   };
-  if(HAL != 0) { //Add hall sensor value
-    toSend.concat(",HAL" + String(digitalRead(HAL)));
+  if(DRA != 0) { //Add door 1 sensor value
+    toSend.concat(",DRA" + String(digitalRead(DRA)));
 
   };
-  if(LIT != 0) { //Add photoresistor value
-    toSend.concat(",LIT" + String(analogRead(LIT)));
+   if(DRB != 0) { //Add door 2 sensor value
+    toSend.concat(",DRB" + String(digitalRead(DRB)));
+
   };
-  if(USN != 0 && USE != 0) { //Add ultrasonic value
-    toSend.concat(",USN" + String(ultrasonic.read()));
+  if(PIZ != 0) { //Add piezo wind value 
+    toSend.concat(",PIZ" + String(analogRead(PIZ)));
+  };
+  if(POT != 0) { //Add potentiometer slider value
+    toSend.concat(",USN" + String(analogRead(POT));
   };
   toSend.concat("\n");
   if(sending = 1) {
@@ -102,9 +105,15 @@ void setup() {
   if(HTS != 0) {
     dht.setup(HTS, DHTesp::DHT11);
   };
-  if(HAL != 0) {
-    pinMode(HAL,INPUT);
+  if(DRA != 0) {
+    pinMode(DRA,INPUT);
   };
+  if(DRB != 0) {
+    pinMode(DRB,INPUT);
+  };
+  if(POT != 0){
+    pinMode(POT,INPUT);
+  }
 }
 
 void loop() {
