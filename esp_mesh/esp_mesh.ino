@@ -63,7 +63,7 @@ void sendMessage() {
     toSend.concat(",PIZ" + String(analogRead(PIZ)));
   };
   if(POT != 0) { //Add potentiometer slider value
-    toSend.concat(",USN" + String(analogRead(POT));
+    toSend.concat(",USN" + String(analogRead(POT)));
   };
   toSend.concat("\n");
   if(sending = 1) {
