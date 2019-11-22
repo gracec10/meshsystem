@@ -1,4 +1,4 @@
-# Emotion Box
+# EmoBox
 
 This piece is called Emotion Box and is representative of how I feel about the CS Department at Yale. My main motivation behind this project to explore VPT8, a projection mapping software. The things projected onto the screen represent different emotional states and are triggered via a mesh network of ESP32 Sensors.
 
