@@ -14,7 +14,13 @@ In order to replicate this installation you'll need the following:
 - A projector
 - A cardboard box and white paper to wrap it in 
 
-First what you'll want to is clone this git repository. Make sure to set up the mesh network and install the four ESPs with sensors in your desired locations. Then flash the fifth ESP, the receiver, with the VTPSerial.ino. This is like the esp_mesh_receiver.ino file in the root folder, but with an additional function to format the serial messages for VPT8. Make sure to check the serial monitor within the Arduino IDE to ensure that you are receiving input from all your ESPs.
+First what you'll want to is clone this git repository. Make sure to set up the mesh network and install the four ESPs with sensors in your desired locations. The exact locations of the sensors can be referenced in the diagram in the root folder, but here is a picture of how they looked installed.
+
+![Sensors](https://github.com/gracec10/meshsystem/blob/master/xavier/sensors.png)
+
+(1 is the temperature, humidty, and piezoelectrics sensor, 2 is one of the two hall sensors installed on the entrance doors, and 3 is the sliding potentiometer)
+
+Then flash the fifth ESP, the receiver, with the VTPSerial.ino. This is like the esp_mesh_receiver.ino file in the root folder, but with an additional function to format the serial messages for VPT8. Make sure to check the serial monitor within the Arduino IDE to ensure that you are receiving input from all your ESPs.
 
 Then you will want to set up the box or space you are projecting onto and your projector, AND THEN NEVER MOVE IT AGAIN. This installation is super fragile in the sense that it moving the projector or box slightly will result in improperly mapped projections. To some small deviations will seem inconsequential, but it will drive perfectionists wild. 
 
