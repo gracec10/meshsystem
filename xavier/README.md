@@ -18,7 +18,7 @@ First what you'll want to is clone this git repository. Make sure to set up the 
 
 ![Sensors](https://github.com/gracec10/meshsystem/blob/master/xavier/sensors.png)
 
-(1 is the temperature, humidty, and piezoelectrics sensor, 2 is one of the two hall sensors installed on the entrance doors, and 3 is the sliding potentiometer)
+(1 is the temperature, humidty, and piezoelectric sensor all in one enclosure. 2 is one of the two hall sensors installed on the entrance doors. The sensor is on the door frame, and the magnet that triggers the sensor is adhered to the door. 3 is the sliding potentiometer. It attached to the wall with velcro adhesives.)
 
 Then flash the fifth ESP, the receiver, with the VTPSerial.ino. This is like the esp_mesh_receiver.ino file in the root folder, but with an additional function to format the serial messages for VPT8. Make sure to check the serial monitor within the Arduino IDE to ensure that you are receiving input from all your ESPs.
 
